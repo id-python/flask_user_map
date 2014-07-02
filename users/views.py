@@ -5,7 +5,7 @@
 """
 import json
 
-from flask import render_template, Response, request
+from flask import render_template, Response, request, url_for
 from werkzeug.exceptions import default_exceptions
 
 # App declared directly in __init__ as per
@@ -153,7 +153,9 @@ def add_user_view():
     body = render_template(
         'text/registration_confirmation_email.txt',
         project_name=APP.config['PROJECT_NAME'],
-        url=APP.config['PUBLIC_URL'],
+        url=url_for(".map_view", _external=True),
+        edit_url=url_for(".edit_user_view", guid=added_user["guid"],
+                         _external=True),
         user=added_user)
     recipient = added_user['email']
     send_async_mail(
@@ -307,7 +309,7 @@ def delete_user_view(guid):
     """
     # Delete User
     delete_user(guid)
-    return APP.config['PUBLIC_URL']
+    return url_for(".map_view")
 
 
 @APP.route('/download')
@@ -362,7 +364,8 @@ def reminder_view():
     body = render_template(
         'text/registration_confirmation_email.txt',
         project_name=APP.config['PROJECT_NAME'],
-        url=APP.config['PUBLIC_URL'],
+        url=url_for(".map_view", _external=True),
+        edit_url=url_for(".edit_user_view", guid=user["guid"], _external=True),
         user=user)
     send_async_mail(
         sender=MAIL_ADMIN,

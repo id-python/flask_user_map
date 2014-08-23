@@ -48,6 +48,9 @@ USER_ICONS = dict(
     shadow='/static/img/marker-shadow.png'
 )
 
+# Directory location for log file
+LOG_DIR = '/tmp'
+
 # By default it uses postgres, hence you'll need to ``psycopg2``.
 # If you're using MySQL, refer to
 # http://docs.sqlalchemy.org/en/rel_0_9/core/engines.html

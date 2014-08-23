@@ -45,12 +45,12 @@ def setup_logger():
     # create formatter that will be added to the handlers
     formatter = logging.Formatter(
         '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    temp_dir = '/tmp'
+    log_dir = APP.config['LOG_DIR']
     # so e.g. jenkins can override log dir.
     if 'USER_MAP_LOGFILE' in os.environ:
         file_name = os.environ['USER_MAP_LOGFILE']
     else:
-        file_name = os.path.join(temp_dir, 'user-map.log')
+        file_name = os.path.join(log_dir, 'user-map.log')
     file_handler = logging.FileHandler(file_name)
     file_handler.setLevel(handler_level)
     # create console handler with a higher log level

@@ -6,5 +6,7 @@
   "email_updates": {{ user.email_updates }},
   "latitude": {{ user.latitude }},
   "longitude": {{ user.longitude }},
+  {% if user.social_account %}
   "twitter": "{{ user.social_account.twitter }}"
+  {% endif %}
 }

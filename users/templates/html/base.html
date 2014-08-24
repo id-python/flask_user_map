@@ -25,6 +25,19 @@
         <script language="javascript" type="text/javascript" src="{{ url_for('static', filename='js/user-map-state.js') }}"></script>
         <script language="javascript" type="text/javascript" src="{{ url_for('static', filename='js/user-map-utilities.js') }}"></script>
         <script language="javascript" type="text/javascript" src="{{ url_for('static', filename='js/validate.js') }}"></script>
+        <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+        <script>
+            function showCaptcha(element) {
+                Recaptcha.create(
+                    "{{ config['RECAPTCHA_PUBLIC_KEY'] }}",
+                    element,
+                    {
+                        theme: "custom",
+                        custom_theme_widget: "recaptcha-widget"
+                    }
+                );
+            }
+        </script>
     {% endblock head_resources %}
 </head>
 <body>

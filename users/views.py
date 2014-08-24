@@ -7,6 +7,7 @@ import json
 
 from flask import render_template, Response, request, current_app
 from werkzeug.exceptions import default_exceptions
+from recaptcha.client import captcha
 
 # App declared directly in __init__ as per
 # http://flask.pocoo.org/docs/patterns/packages/#larger-applications
@@ -122,6 +123,17 @@ def add_user_view():
     user = get_user_by_email(email)
     if user is not None:
         message['email'] = 'Email has been registered by other user.'
+
+    if not current_app.testing:
+        captcha_resp = captcha.submit(
+            request.form.get("recaptcha_challenge_field", ""),
+            request.form.get("recaptcha_response_field", ""),
+            current_app.config["RECAPTCHA_PRIVATE_KEY"],
+            request.remote_addr,
+        )
+
+        if not captcha_resp.is_valid:
+            message["recaptcha_response_field"] = "Captcha is not valid"
 
     # Process data
     if len(message) != 0:

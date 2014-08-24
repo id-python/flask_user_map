@@ -56,3 +56,6 @@ LOG_DIR = '/tmp'
 # http://docs.sqlalchemy.org/en/rel_0_9/core/engines.html
 # for details.
 SQLALCHEMY_DATABASE_URI = "postgresql://scott:tiger@localhost:5432/mydatabase"
+
+RECAPTCHA_PUBLIC_KEY = ""
+RECAPTCHA_PRIVATE_KEY = ""

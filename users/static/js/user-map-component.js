@@ -213,6 +213,12 @@ function onMapClick(e) {
   };
   var popup = getUserFormPopup(user, ADD_USER_MODE);
   marker_new_user.bindPopup(popup).openPopup()
+
+  // activate captcha
+  var captcha_element = document.getElementById("recaptcha-container");
+  if (captcha_element !== null) {
+    showCaptcha(captcha_element);
+  }
 }
 
 /**

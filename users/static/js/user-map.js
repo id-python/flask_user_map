@@ -96,6 +96,9 @@ function addUser() {
 
   var twitter = $("#twitter").val();
 
+  var recaptcha_response_field = $("#recaptcha_response_field").val();
+  var recaptcha_challenge_field = $("#recaptcha_challenge_field").val();
+
   var is_client_side_valid = validate_user_form(name, email, website);
   if (is_client_side_valid) {
     $.ajax({
@@ -108,18 +111,28 @@ function addUser() {
         email_updates: email_updates,
         latitude: latitude,
         longitude: longitude,
-        twitter: twitter
+        twitter: twitter,
+        recaptcha_response_field: recaptcha_response_field,
+        recaptcha_challenge_field: recaptcha_challenge_field
       },
       success: function (response) {
         if (response.type.toString() == 'Error') {
           if (typeof response.name != 'undefined') {
             $name_input.parent().addClass('has-error');
-            $name_input.attr('placeholder', response.name.toString());
+            var $name_err = $("#name-error");
+            $name_err.text(response.name.toString());
 
           }
           if (typeof response.email != 'undefined') {
             $email_input.parent().addClass('has-error');
-            $email_input.attr('placeholder', response.email.toString());
+            var $email_err = $("#email-error");
+            $email_err.text(response.email.toString());
+          }
+          if (typeof response.recaptcha_response_field != 'undefined') {
+            var $captha_input = $("#recaptcha_response_field");
+            $captha_input.parent().addClass('has-error');
+            var $captcha_err = $("#captcha-error");
+            $captcha_err.text(response.recaptcha_response_field.toString());
           }
         } else {
           //Clear marker

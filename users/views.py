@@ -207,7 +207,7 @@ def edit_user_view(guid):
     #noinspection PyUnresolvedReferences
     data_privacy_content = render_template('html/data_privacy.html')
     #noinspection PyUnresolvedReferences
-    user_form_template = render_template('html/user_form.html')
+    user_form_template = render_template('html/user_form.html', user=user)
     user_menu = dict(
         edit_user=True,
         delete_user=True,

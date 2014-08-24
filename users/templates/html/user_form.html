@@ -60,6 +60,8 @@
           <input style="display: none;" type="text" id="lng" name="lng"
                  value=""/>
         </div>
+
+        {% if not user %}
         <div class="form-group">
             <div id="recaptcha-container">
                 <div id="recaptcha-widget">
@@ -80,6 +82,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
 
         <div class="form-group">
           <div>

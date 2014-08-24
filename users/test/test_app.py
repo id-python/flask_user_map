@@ -84,7 +84,7 @@ class AppTestCase(FlaskTestCase):
         guid = add_user(**data)
         if guid is not None:
             try:
-                result = self.client.post(
+                result = self.client.get(
                     '/users.json',
                     data=dict(),
                     follow_redirects=True)
